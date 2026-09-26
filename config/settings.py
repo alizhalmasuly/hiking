@@ -17,9 +17,15 @@ else:
             if line and not line.startswith("#") and "=" in line:
                 name, value = line.split("=", 1)
                 os.environ.setdefault(name.strip(), value.strip().strip("\"'"))
-SECRET_KEY = os.getenv("SECRET_KEY", "dev-only-mountain-hiking-key")
-DEBUG = os.getenv("DEBUG", "True").lower() == "true"
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
+import os
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+DEBUG = False
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    ".vercel.app",
+]
 INSTALLED_APPS = ["django.contrib.admin", "django.contrib.auth", "django.contrib.contenttypes", "django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles", "accounts", "mountains", "hikes", "community", "weather", "ai_assistant"]
 MIDDLEWARE = ["django.middleware.security.SecurityMiddleware", "django.contrib.sessions.middleware.SessionMiddleware", "django.middleware.locale.LocaleMiddleware", "django.middleware.common.CommonMiddleware", "django.middleware.csrf.CsrfViewMiddleware", "django.contrib.auth.middleware.AuthenticationMiddleware", "django.contrib.messages.middleware.MessageMiddleware", "django.middleware.clickjacking.XFrameOptionsMiddleware"]
 ROOT_URLCONF = "config.urls"
