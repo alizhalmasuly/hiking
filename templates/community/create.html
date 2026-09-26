@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% load i18n %}{% block content %}<section class="page-hero"><div class="eyebrow">{% trans "СООБЩЕСТВО" %}</div><h1>{% trans "Расскажи свою историю." %}</h1></section><section class="section narrow panel"><form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn btn-dark">{% trans "Опубликовать" %} ↗</button></form></section>{% endblock %}

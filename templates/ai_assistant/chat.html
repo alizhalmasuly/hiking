@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "AI-помощник — Высота" %}{% endblock %}
+{% block content %}
+<section class="assistant-hero">
+  <div class="assistant-hero-copy">
+    <div class="eyebrow"><span class="pulse"></span> {% trans "ВАШ СПУТНИК ПЕРЕД ВЫХОДОМ" %}</div>
+    <h1>{% trans "Идти выше." %}<br><em>{% trans "Готовиться умнее." %}</em></h1>
+    <p>{% trans "Расскажите о маршруте и снаряжении. Помогу проверить список, оценить условия и заметить, что легко забыть." %}</p>
+  </div>
+  <div class="assistant-hero-stamp"><span>✳</span><b>{% trans "ПЛАНИРУЙ" %}<br>{% trans "С ЗАБОТОЙ" %}</b><small>{% trans "АЛАТАУ" %} · 43° N</small></div>
+</section>
+<section class="assistant-workspace">
+  <aside class="assistant-context">
+    <div class="context-heading"><span class="context-icon">⌁</span><div><b>{% trans "Ваш маршрут" %}</b><small>{% trans "Добавьте детали для точных советов" %}</small></div></div>
+    <label for="ctx-mountain">{% trans "Гора или маршрут" %}</label>
+    <select id="ctx-mountain"><option value="">{% trans "Пока не выбрал" %}</option>{% for mountain in mountains %}<option value="{{ mountain.name }}" {% if saved_context.mountain == mountain.name %}selected{% endif %}>{% trans mountain.name %} · {{ mountain.altitude }} {% trans "м" %}</option>{% endfor %}</select>
+    <div class="context-split"><div><label for="ctx-season">{% trans "Сезон" %}</label><select id="ctx-season"><option value="Лето" {% if saved_context.season == 'Лето' or not saved_context.season %}selected{% endif %}>{% trans "Лето" %}</option><option value="Весна" {% if saved_context.season == 'Весна' %}selected{% endif %}>{% trans "Весна" %}</option><option value="Осень" {% if saved_context.season == 'Осень' %}selected{% endif %}>{% trans "Осень" %}</option><option value="Зима" {% if saved_context.season == 'Зима' %}selected{% endif %}>{% trans "Зима" %}</option></select></div><div><label for="ctx-duration">{% trans "Длительность" %}</label><select id="ctx-duration"><option value="1 день" {% if saved_context.duration == '1 день' or not saved_context.duration %}selected{% endif %}>{% trans "1 день" %}</option><option value="2 дня" {% if saved_context.duration == '2 дня' %}selected{% endif %}>{% trans "2 дня" %}</option><option value="3 дня и больше" {% if saved_context.duration == '3 дня и больше' %}selected{% endif %}>{% trans "3 дня и больше" %}</option></select></div></div>
+    <div class="context-note"><span>✦</span><p>{% trans "Погода в горах меняется быстро. Перед выходом проверьте официальный прогноз и сообщите близким свой маршрут." %}</p></div>
+    <div class="assistant-status"><span class="status-dot"></span><span>{% trans "Помощник готов" %}</span><small>{% trans "Демо-режим" %}</small></div>
+  </aside>
+  <section class="assistant-chat" aria-label="{% trans 'Чат с AI-помощником' %}">
+    <header class="chat-topbar"><div class="bot-avatar">✳</div><div class="bot-name"><b>VYSOTA <span>AI</span></b><small><i></i> {% trans "Помощник по подготовке" %}</small></div><button type="button" id="clear-chat" class="clear-chat" title="{% trans 'Очистить диалог' %}">↻ <span>{% trans "Новый разговор" %}</span></button></header>
+    <div class="chat-messages" id="chat-messages" aria-live="polite">
+      <div class="message-row bot-row"><div class="message-avatar">✳</div><div><div class="bubble assistant-bubble">{% trans "Привет! Я помогу собраться в горы без лишнего стресса. Выберите маршрут или расскажите, что уже положили в рюкзак." %}</div><small class="message-time">{% trans "Только что" %}</small></div></div>
+      {% for entry in history %}<div class="message-row {% if entry.role == 'assistant' %}bot-row{% else %}user-row{% endif %}">{% if entry.role == 'assistant' %}<div class="message-avatar">✳</div>{% endif %}<div class="message-body"><div class="bubble {% if entry.role == 'assistant' %}assistant-bubble{% else %}user-bubble{% endif %}">{{ entry.content }}</div></div></div>{% endfor %}
+      <div class="suggestions" aria-label="{% trans 'Примеры вопросов' %}"><button type="button" class="suggestion">{% trans "Проверь моё снаряжение" %}</button><button type="button" class="suggestion">{% trans "Что взять на однодневный маршрут?" %}</button><button type="button" class="suggestion">{% trans "Как подготовиться к переменчивой погоде?" %}</button></div>
+    </div>
+    <form class="chat-input" id="chat-form">{% csrf_token %}<label for="chat-text" class="sr-only">{% trans "Ваш вопрос" %}</label><textarea id="chat-text" rows="1" maxlength="2000" placeholder="{% trans 'Напишите вопрос или список вещей…' %}" required></textarea><button class="send-button" aria-label="{% trans 'Отправить сообщение' %}">↑</button><div class="composer-hint">{% trans "Enter — отправить" %} <span>·</span> Shift + Enter — {% trans "новая строка" %}</div></form>
+    <div class="chat-disclaimer">{% trans "AI-подсказки помогают планировать и не заменяют официальные прогнозы и решения спасательных служб." %}</div>
+  </section>
+</section>
+{% endblock %}
