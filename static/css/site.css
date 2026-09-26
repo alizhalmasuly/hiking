@@ -14,3 +14,72 @@
 .gear-analysis{margin-top:10px;width:min(100%,380px);padding:12px 13px;border:1px solid #e3e9df;border-radius:10px;background:#fbfcf9}.gear-analysis-heading{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#52675a}.gear-analysis-heading strong{font:600 16px 'Playfair Display',serif;color:#325b43}.gear-progress{height:4px;background:#e7ece5;border-radius:5px;margin-top:8px;overflow:hidden}.gear-progress span{height:100%;display:block;border-radius:5px;background:linear-gradient(90deg,#759b6e,#d0a761);transition:width .45s}.gear-list{margin-top:10px}.gear-list>small{display:block;margin-bottom:6px;font-size:8px;font-weight:700;letter-spacing:.4px;color:#748278}.gear-pills{display:flex;flex-wrap:wrap;gap:5px}.gear-pills span{border-radius:20px;padding:5px 7px;font-size:8px;background:#eef3ed;color:#52705a}.gear-missing .gear-pills span{background:#f6f0e6;color:#8b6c3e}
 .gear-alerts{border-top:1px solid #e9e5da;margin-top:10px;padding-top:7px}.gear-alerts p{margin:4px 0;color:#826d49;font-size:8px;line-height:1.6}
 .assistant-float{position:fixed;z-index:40;right:clamp(16px,3vw,38px);bottom:clamp(16px,3vw,32px);height:56px;padding:0 17px 0 10px;display:flex;align-items:center;gap:11px;border:1px solid #ffffff25;border-radius:999px;background:linear-gradient(135deg,#254f3e,#15372f);color:#fff;box-shadow:0 12px 32px #0e2b2280,0 2px 7px #0e2b222e;transition:transform .2s,box-shadow .2s,background .2s}.assistant-float:hover{transform:translateY(-3px);background:linear-gradient(135deg,#32664e,#194333);box-shadow:0 17px 36px #0e2b228c}.assistant-float-icon{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#e0b675;color:#173a30;font-size:19px}.assistant-float-label{font-size:11px;font-weight:700;letter-spacing:.1px}.assistant-float-arrow{margin-left:3px;color:#dfbd8a;font-size:15px}.assistant-float:focus-visible{outline:3px solid #e0b675;outline-offset:3px}@media(max-width:520px){.assistant-float{right:15px;bottom:15px;height:52px;padding-right:14px;gap:8px}.assistant-float-icon{width:34px;height:34px}.assistant-float-label{font-size:10px}}
+
+/* Fluid layouts and small-screen overflow protection */
+img, video, iframe { max-width: 100%; }
+main, section, article, .panel, .auth-card, .chat-shell, .assistant-workspace { min-width: 0; }
+body { overflow-x: hidden; }
+.section, .page-hero, .detail-hero, .story-detail-cover, .assistant-hero { overflow-wrap: anywhere; }
+input, select, textarea, button { max-width: 100%; }
+
+@media (min-width: 1400px) {
+  .section, .mountain-section, .footer { padding-left: max(9vw, calc((100vw - 1320px)/2)); padding-right: max(9vw, calc((100vw - 1320px)/2)); }
+  .mountain-grid, .story-grid { gap: 28px; }
+}
+
+@media (max-width: 760px) {
+  .detail-content, .planner-layout, .weather-layout, .feature-band { grid-template-columns: minmax(0,1fr); }
+  .feature-band { padding-top: 58px; padding-bottom: 58px; }
+  .feature-visual { min-height: 280px; padding: 22px; }
+  .detail-content { gap: 28px; }
+  .footer { flex-wrap: wrap; }
+  .footer-links { flex-wrap: wrap; }
+}
+
+@media (max-width: 520px) {
+  html { -webkit-text-size-adjust: 100%; }
+  .nav { padding: 0 14px; gap: 8px; }
+  .brand { font-size: 18px; gap: 4px; }
+  .brand-mark { font-size: 17px; }
+  .brand-dot { margin-left: -5px; }
+  .nav-actions { margin-right: 4px; gap: 8px; }
+  .nav-actions select { font-size: 10px; padding: 5px 1px; }
+  .nav-user, .link-btn { font-size: 10px; white-space: nowrap; }
+  .nav-actions form { flex: 0 0 auto; }
+  .hero { min-height: min(690px, calc(100svh - 66px)); height: auto; padding: 54px 21px 44px; }
+  .hero h1 { font-size: clamp(39px, 11vw, 52px); letter-spacing: -1.5px; }
+  .hero-stats { flex-wrap: wrap; gap: 18px 24px; }
+  .hero-note { display: none; }
+  .section-head { flex-wrap: wrap; }
+  .section-head h2 { font-size: clamp(25px, 7vw, 30px); }
+  .page-hero { padding-top: 56px; padding-bottom: 50px; }
+  .page-hero h1, .detail-hero h1, .story-detail-cover h1 { font-size: clamp(36px, 10vw, 52px); letter-spacing: -1.5px; }
+  .detail-hero, .story-detail-cover { min-height: 340px; padding: 48px 22px; }
+  .story-detail-cover { padding-top: 90px; }
+  .weather-now { padding: 25px 20px; }
+  .weather-temp { font-size: clamp(58px, 17vw, 78px); }
+  .weather-metrics { flex-wrap: wrap; gap: 14px 22px; }
+  .forecast { padding: 20px 16px; }
+  .forecast-row { grid-template-columns: .8fr 1fr auto; gap: 5px; font-size: 10px; }
+  .panel, .auth-card { padding: 21px 17px; }
+  .auth-card { margin-top: 36px; margin-bottom: 55px; }
+  .profile-hero { grid-template-columns: 52px minmax(0,1fr); column-gap: 13px; }
+  .profile-avatar { width: 50px; height: 50px; font-size: 23px; }
+  .profile-hero h1 { font-size: clamp(27px, 8vw, 38px); overflow-wrap: anywhere; }
+  .chat-shell { padding: 16px 12px; }
+  .bubble { overflow-wrap: anywhere; }
+  .assistant-float { bottom: max(14px, env(safe-area-inset-bottom)); }
+  .footer { padding: 38px 22px; }
+  .footer-links { gap: 12px 18px; }
+}
+
+@media (max-width: 360px) {
+  .brand { font-size: 16px; }
+  .nav { padding: 0 10px; }
+  .nav-actions { gap: 5px; }
+  .nav-user, .link-btn { font-size: 9px; }
+  .hero-actions .btn { padding: 12px 14px; font-size: 11px; }
+  .assistant-float-label { display: none; }
+  .assistant-float { width: 52px; padding: 0; justify-content: center; }
+  .assistant-float-arrow { display: none; }
+}
